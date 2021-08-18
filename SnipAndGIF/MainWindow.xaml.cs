@@ -13,6 +13,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using NHotkey;
+using NHotkey.Wpf;
+
+using SnipAndGIF.Helpers;
+
 namespace SnipAndGIF
 {
     /// <summary>
@@ -20,9 +25,46 @@ namespace SnipAndGIF
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static RoutedCommand StartCaptureCommand = new RoutedCommand();
+
         public MainWindow()
         {
             InitializeComponent();
+
+            HotkeyManager.Current.AddOrReplace("Start Capture", new KeyGesture(Key.G, ModifierKeys.Shift | ModifierKeys.Windows), OnCaptureHotkey);
+        }
+
+        private void OnCaptureHotkey(object sender, HotkeyEventArgs e)
+        {
+            ShowCaptureWindow();
+        }
+
+        private void CaptureButton_Click(object sender, RoutedEventArgs e)
+        {
+            ShowCaptureWindow();
+        }
+
+        private void ShowCaptureWindow()
+        {
+            Rect windowRect = WindowHelper.GetCurrentScreenBounds();
+
+            CaptureWindow window = new CaptureWindow
+            {
+                Width = windowRect.Width,
+                Height = windowRect.Height,
+                Left = windowRect.Left,
+                Top = windowRect.Top
+            };
+
+            window.Closed += OnCaptureWindowClosed;
+
+            window.Show();
+            Hide();
+        }
+
+        private void OnCaptureWindowClosed(object sender, EventArgs e)
+        {
+            Show();
         }
     }
 }
