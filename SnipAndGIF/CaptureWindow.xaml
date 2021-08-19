@@ -7,7 +7,22 @@
         mc:Ignorable="d"
         Title="CaptureWindow" Height="450" Width="800" Background="#66000000" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize" Topmost="True" ShowInTaskbar="False">
 
+    <Window.OpacityMask>
+        <DrawingBrush>
+            <DrawingBrush.Drawing>
+                <GeometryDrawing Brush="Black">
+                    <GeometryDrawing.Geometry>
+                        <GeometryGroup>
+                            <RectangleGeometry Rect="0,0,1,1"/>
+                            <RectangleGeometry Rect="0.2,0.2,0.2,0.2" x:Name="CaptureRectGeometry" />
+                        </GeometryGroup>
+
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+    </Window.OpacityMask>
     <Grid>
-        
+        <Rectangle x:Name="CaptureRectBounds" Fill="White" Margin="152,82,446,180"/>
     </Grid>
 </Window>
