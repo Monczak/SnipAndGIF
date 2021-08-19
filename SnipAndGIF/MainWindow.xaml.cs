@@ -25,8 +25,6 @@ namespace SnipAndGIF
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static RoutedCommand StartCaptureCommand = new RoutedCommand();
-
         public MainWindow()
         {
             InitializeComponent();
